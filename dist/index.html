@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#0A84FF" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="GrowPet" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png" />
+    <title>GrowPet Alpha v1</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="主导航">
+        <div class="brand">
+          <div class="brand-mark">GP</div>
+          <div>
+            <strong>GrowPet</strong>
+            <span>萌宠成长记</span>
+          </div>
+        </div>
+        <nav class="nav-list">
+          <button class="nav-item active" data-page="dashboard" aria-current="page">
+            <span class="icon" data-icon="home"></span><span>首页</span>
+          </button>
+          <button class="nav-item" data-page="tasks">
+            <span class="icon" data-icon="book"></span><span>学习</span>
+          </button>
+          <button class="nav-item" data-page="courses">
+            <span class="icon" data-icon="calendar"></span><span>课程</span>
+          </button>
+          <button class="nav-item" data-page="pet">
+            <span class="icon" data-icon="spark"></span><span>宠物</span>
+          </button>
+          <button class="nav-item" data-page="collection">
+            <span class="icon" data-icon="grid"></span><span>图鉴</span>
+          </button>
+          <button class="nav-item" data-page="store">
+            <span class="icon" data-icon="bag"></span><span>商城</span>
+          </button>
+          <button class="nav-item" data-page="bag">
+            <span class="icon" data-icon="box"></span><span>背包</span>
+          </button>
+          <button class="nav-item" data-page="profile">
+            <span class="icon" data-icon="person"></span><span>我的</span>
+          </button>
+        </nav>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow" id="page-eyebrow">今日概览</p>
+            <h1 id="page-title">My Sweet Home</h1>
+          </div>
+          <div class="toolbar" aria-label="显示设置">
+            <span class="mode-pill" id="app-mode-pill">家庭使用模式</span>
+            <button class="tool-button" id="font-button" type="button" aria-label="切换动态字号">
+              <span class="icon" data-icon="text"></span>
+            </button>
+            <button class="tool-button" id="theme-button" type="button" aria-label="切换深色模式">
+              <span class="icon" data-icon="moon"></span>
+            </button>
+          </div>
+        </header>
+
+        <section class="page active" id="dashboard" aria-label="首页 Dashboard">
+          <div class="app-status" id="app-status" hidden></div>
+          <div class="hero-panel">
+            <div class="hero-copy">
+              <span class="status-pill" id="dashboard-task-status">今日 0/4 个任务</span>
+              <h2 id="dashboard-growth-title">小兔子正在等成长能量</h2>
+              <p>完成学习打卡后，主页会用清楚的卡片反馈今日进度、课程提醒和宠物状态。</p>
+            </div>
+            <div class="rabbit-card" aria-label="静态小兔子展示">
+              <img class="pet-image hero-pet js-current-skin" src="./assets/pets/rabbit/default/rabbit-stage1-default.png" alt="小兔子当前皮肤" />
+              <div class="progress-row"><b id="hero-pet-level">Lv 9</b><div class="progress"><i id="hero-xp-bar" style="width: 89%"></i></div></div>
+            </div>
+          </div>
+
+          <div class="metric-grid">
+            <article class="metric-card blue"><span class="icon" data-icon="bolt"></span><b id="metric-total-xp">0</b><span>总 XP</span></article>
+            <article class="metric-card green"><span class="icon" data-icon="spark"></span><b id="metric-current-level">Lv 9</b><span>当前等级</span></article>
+            <article class="metric-card orange"><span class="icon" data-icon="check"></span><b id="metric-completed">0</b><span>完成任务数</span></article>
+            <article class="metric-card purple"><span class="icon" data-icon="flame"></span><b id="metric-streak">0 天</b><span>连续学习</span></article>
+            <article class="metric-card green"><span class="icon" data-icon="gift"></span><b id="metric-reward-ready">可领取</b><span>今日奖励</span></article>
+            <article class="metric-card blue"><span class="icon" data-icon="calendar"></span><b id="metric-checkin-streak">0 天</b><span>连续签到</span></article>
+            <article class="metric-card orange"><span class="icon" data-icon="spark"></span><b id="metric-achievements">0</b><span>成就数量</span></article>
+            <article class="metric-card purple"><span class="icon" data-icon="gift"></span><b id="metric-claimable-rewards">0</b><span>可领取奖励</span></article>
+          </div>
+
+          <div class="content-grid">
+            <section class="card">
+              <div class="section-title"><h3>今日学习</h3><span id="task-source-label">家庭任务</span></div>
+              <div class="list" id="dashboard-task-list"></div>
+            </section>
+            <section class="card reward-center-card">
+              <div class="section-title"><h3>每日奖励</h3><span id="daily-reward-cycle">第 1 天</span></div>
+              <div class="reward-summary">
+                <span class="icon green-bg" data-icon="gift"></span>
+                <div><b id="daily-reward-title">今日可领取奖励</b><p id="daily-reward-copy">每天首次打开 App 都有成长能量。</p></div>
+              </div>
+              <div class="reward-grid" id="streak-reward-grid"></div>
+              <button class="primary-action" id="claim-daily-reward" type="button">领取今日奖励</button>
+            </section>
+            <section class="card reward-center-card">
+              <div class="section-title"><h3>奖励宝箱</h3><span id="reward-chest-status">0 个可领取</span></div>
+              <div class="reward-chest-list" id="reward-chest-list"></div>
+            </section>
+            <section class="card">
+              <div class="section-title"><h3>下一个课程</h3><span>提醒</span></div>
+              <div class="course-callout">
+                <span class="icon orange-bg" data-icon="calendar"></span>
+                <div><b>钢琴课</b><p>今天 17:30 · 课前 30 分钟提醒</p></div>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="page" id="tasks" aria-label="学习任务列表">
+          <div class="growth-feedback card" id="growth-feedback" aria-live="polite"></div>
+          <div class="page-grid" id="task-grid"></div>
+        </section>
+
+        <section class="page" id="collection" aria-label="宠物图鉴">
+          <div class="section-title page-section-title"><h3>成长图鉴</h3><span>兔子 / 猫咪 / 小猪</span></div>
+          <div class="collection-grid" id="collection-grid"></div>
+        </section>
+
+        <section class="page" id="courses" aria-label="兴趣班列表">
+          <div class="timeline card">
+            <div class="section-title"><h3>本周兴趣班</h3><button class="inline-action" type="button" data-page-jump="course-settings">配置课程</button></div>
+            <div id="course-timeline-list"></div>
+          </div>
+        </section>
+
+        <section class="page" id="pet" aria-label="宠物页静态">
+          <div class="pet-layout">
+            <div class="pet-stage card">
+              <img class="pet-image showcase-pet js-current-skin" src="./assets/pets/rabbit/default/rabbit-stage1-default.png" alt="小兔子当前皮肤" />
+              <h2 id="current-pet-name">小兔子</h2>
+              <p><span id="current-pet-summary">Lv6 · Stage1 幼年体</span> · 当前成长路线：<strong class="js-current-skin-name">默认路线</strong></p>
+              <div class="progress-row"><b>XP</b><div class="progress"><i id="pet-xp-bar" style="width: 64%"></i></div><span id="pet-xp-text">320/500</span></div>
+              <div class="stage-actions dev-only" id="stage-switcher" aria-label="等级状态调试"></div>
+              <div class="skin-actions" id="pet-skin-switcher"></div>
+            </div>
+            <div class="card">
+              <div class="section-title"><h3>成长路线预览</h3><span>完整阶段 PNG</span></div>
+              <div class="pet-gallery" id="pet-stage-preview"></div>
+            </div>
+            <div class="card pet-stats-card">
+              <div class="section-title"><h3>成长日志</h3><span>升级 / 进化</span></div>
+              <div class="growth-log-list" id="growth-log-list"></div>
+            </div>
+            <div class="card pet-stats-card">
+              <div class="section-title"><h3>数值装备栏</h3><span>不显示在宠物身上</span></div>
+              <div class="equipment-slot-grid" id="stat-equipment-grid"></div>
+            </div>
+            <div class="card pet-stats-card">
+              <div class="section-title"><h3>属性</h3><span>数值装备</span></div>
+              <div class="attribute-grid">
+                <div><b>专注</b><span id="attr-focus">42</span></div>
+                <div><b>技巧</b><span id="attr-skill">36</span></div>
+                <div><b>创造力</b><span id="attr-creativity">28</span></div>
+                <div><b>幸运</b><span id="attr-luck">15%</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="page" id="store" aria-label="商城页静态">
+          <div class="section-title page-section-title"><h3>成长商城</h3><span id="store-points-label">积分余额</span></div>
+          <section class="store-section">
+            <div class="section-title"><h3>皮肤路线</h3><span>完整三阶段路线</span></div>
+            <div class="store-grid skin-store-grid" id="skin-store-grid"></div>
+          </section>
+          <section class="store-section">
+            <div class="section-title"><h3>成长道具</h3><span>消耗品 / 进化材料 / 转换券</span></div>
+            <div class="store-grid compact-store-grid" id="growth-store-grid"></div>
+          </section>
+          <section class="store-section dev-only">
+            <div class="section-title"><h3>Gemini 路线参考</h3><span>临时参考，不是正式资源</span></div>
+            <div class="reference-grid" id="reference-board-grid"></div>
+          </section>
+        </section>
+
+        <section class="page" id="tryon" aria-label="试穿页">
+          <div class="tryon-layout">
+            <section class="card tryon-hero">
+              <div>
+                <span class="status-pill">试穿中</span>
+                <h2 id="tryon-title">默认路线</h2>
+                <p id="tryon-copy">直接切换完整成长阶段 PNG。</p>
+              </div>
+              <img class="pet-image showcase-pet" id="tryon-main-image" src="./assets/pets/rabbit/default/rabbit-stage1-default.png" alt="当前阶段试穿效果" />
+            </section>
+            <section class="card">
+              <div class="section-title"><h3>Stage1 / Stage2 / Stage3</h3><span>成长路线预览</span></div>
+              <div class="pet-gallery" id="tryon-stage-preview"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="page" id="bag" aria-label="背包页">
+          <div class="section-title page-section-title"><h3>成长背包</h3><span>皮肤路线 / 道具 / 数值装备</span></div>
+          <section class="store-section">
+            <div class="section-title"><h3>道具与数值装备</h3><span id="inventory-count-label">0 件</span></div>
+            <div class="store-grid compact-store-grid" id="inventory-item-grid"></div>
+          </section>
+          <div class="store-grid skin-store-grid" id="skin-bag-grid"></div>
+        </section>
+
+        <section class="page" id="profile" aria-label="我的页面">
+          <div class="profile-grid">
+            <section class="card profile-card">
+              <div class="avatar" id="profile-avatar">悦</div>
+              <div><h2 id="profile-title">悦悦的成长空间</h2><p id="profile-mode-copy">家庭使用模式 · 本地数据</p></div>
+            </section>
+            <section class="card settings-list">
+              <button class="list-row settings-button" type="button" data-page-jump="parent-settings"><span class="icon blue-bg" data-icon="person"></span><div><b>家长设置</b><small>任务、提醒、权限</small></div><em>进入</em></button>
+              <button class="list-row settings-button" type="button" data-page-jump="course-settings"><span class="icon orange-bg" data-icon="calendar"></span><div><b>课程提醒配置</b><small>兴趣班、上课时间、提醒分钟数</small></div><em>进入</em></button>
+              <button class="list-row settings-button" id="toggle-app-mode" type="button"><span class="icon green-bg" data-icon="spark"></span><div><b>使用模式</b><small id="mode-setting-copy">家庭使用模式</small></div><em>切换</em></button>
+              <div class="list-row"><span class="icon purple-bg" data-icon="moon"></span><div><b>显示外观</b><small>支持 Light / Dark</small></div><em>已启用</em></div>
+              <div class="list-row"><span class="icon green-bg" data-icon="text"></span><div><b>动态字体</b><small>支持大字号验证</small></div><em>可切换</em></div>
+            </section>
+            <section class="card settings-form-card">
+              <div class="section-title"><h3>存档安全</h3><span>导出 / 导入</span></div>
+              <div class="backup-reminder">
+                <b>备份提醒</b>
+                <p>真实设备试用前后，请定期导出 JSON 存档，避免 Safari 清理网站数据后丢失记录。</p>
+              </div>
+              <div class="form-actions">
+                <button class="primary-action" id="export-save-data" type="button">导出存档 JSON</button>
+                <button class="secondary-action" id="import-save-data" type="button">导入存档 JSON</button>
+              </div>
+              <label class="form-field"><span>存档 JSON</span><textarea id="save-data-json" rows="7" placeholder="导出的存档会显示在这里，也可以粘贴 JSON 后导入。"></textarea></label>
+              <p class="settings-status" id="save-data-status">导入前建议先导出当前存档。</p>
+            </section>
+            <section class="card settings-form-card">
+              <div class="section-title"><h3>设备检查</h3><span id="device-version-label">版本号</span></div>
+              <div class="device-info-grid">
+                <div><b>当前模式</b><span id="device-mode">-</span></div>
+                <div><b>PWA Standalone</b><span id="device-standalone">-</span></div>
+                <div><b>Service Worker</b><span id="device-sw-status">-</span></div>
+                <div><b>缓存版本</b><span id="device-cache-version">-</span></div>
+                <div><b>localStorage 占用</b><span id="device-storage-usage">-</span></div>
+                <div><b>当前存档版本</b><span id="device-save-version">-</span></div>
+              </div>
+              <div class="form-actions">
+                <button class="secondary-action" id="refresh-device-info" type="button">刷新设备信息</button>
+                <button class="primary-action" id="refresh-pwa-cache" type="button">刷新 PWA 缓存</button>
+              </div>
+              <p class="settings-status" id="device-status">真机试用前请确认缓存版本和存档版本。</p>
+            </section>
+            <section class="card settings-form-card">
+              <div class="section-title"><h3>试运行统计</h3><span>Beta 3</span></div>
+              <div class="device-info-grid">
+                <div><b>累计完成任务数</b><span id="pilot-total-tasks">0</span></div>
+                <div><b>累计获得 XP</b><span id="pilot-total-xp">0</span></div>
+                <div><b>累计获得积分</b><span id="pilot-total-points">0</span></div>
+                <div><b>连续学习最高值</b><span id="pilot-best-streak">0 天</span></div>
+                <div><b>累计签到次数</b><span id="pilot-total-checkins">0</span></div>
+                <div><b>累计领取奖励次数</b><span id="pilot-total-rewards">0</span></div>
+              </div>
+            </section>
+            <section class="card settings-form-card">
+              <div class="section-title"><h3>家长观察</h3><span>最近 7 天</span></div>
+              <div class="device-info-grid">
+                <div><b>任务完成率</b><span id="insight-task-rate">0%</span></div>
+                <div><b>XP 获取量</b><span id="insight-xp-7d">0</span></div>
+                <div><b>课程签到次数</b><span id="insight-course-checkins">0</span></div>
+                <div><b>最常完成任务</b><span id="insight-top-task">暂无</span></div>
+              </div>
+            </section>
+            <section class="card settings-form-card">
+              <div class="section-title"><h3>成长记录</h3><span>导出报告</span></div>
+              <div class="growth-log-list" id="pilot-history-list"></div>
+              <div class="form-actions">
+                <button class="primary-action" id="export-pilot-report" type="button">导出试运行报告 JSON</button>
+              </div>
+              <label class="form-field"><span>pilot-report.json</span><textarea id="pilot-report-json" rows="7" placeholder="试运行报告会显示在这里。"></textarea></label>
+              <p class="settings-status" id="pilot-report-status">建议试用 7 天后导出报告。</p>
+            </section>
+          </div>
+        </section>
+
+        <section class="page" id="parent-settings" aria-label="家长设置页">
+          <div class="settings-layout">
+            <section class="card settings-form-card">
+              <div class="section-title"><h3>孩子与成长设置</h3><span>localStorage</span></div>
+              <label class="form-field"><span>孩子昵称</span><input id="setting-child-nickname" type="text" maxlength="12" /></label>
+              <label class="form-field"><span>当前宠物</span><select id="setting-current-pet"></select></label>
+              <label class="form-field switch-field"><span>开启小游戏入口</span><input id="setting-mini-game-enabled" type="checkbox" /></label>
+              <label class="form-field"><span>每日提醒时间</span><input id="setting-daily-reminder-time" type="time" /></label>
+              <div class="form-actions">
+                <button class="primary-action" id="save-parent-settings" type="button">保存家长设置</button>
+                <button class="secondary-action" id="reset-today-tasks" type="button">重置今日任务</button>
+                <button class="danger-action" id="clear-test-data" type="button">清空测试数据</button>
+              </div>
+              <p class="settings-status" id="parent-settings-status">设置会保存在本机。</p>
+            </section>
+            <section class="card settings-form-card">
+              <div class="section-title"><h3>每日任务模板</h3><span>XP / 积分</span></div>
+              <div class="task-template-list" id="task-template-list"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="page" id="course-settings" aria-label="课程提醒基础配置页">
+          <div class="settings-layout">
+            <section class="card settings-form-card">
+              <div class="section-title"><h3>添加或修改课程</h3><span id="course-form-mode">新增</span></div>
+              <input id="course-edit-id" type="hidden" />
+              <label class="form-field"><span>兴趣班名称</span><input id="course-name" type="text" maxlength="18" /></label>
+              <label class="form-field"><span>上课星期</span><select id="course-weekday"></select></label>
+              <label class="form-field"><span>上课时间</span><input id="course-time" type="time" /></label>
+              <label class="form-field"><span>提前提醒分钟数</span><input id="course-remind-minutes" type="number" min="0" max="180" step="5" /></label>
+              <label class="form-field switch-field"><span>启用提醒</span><input id="course-enabled" type="checkbox" /></label>
+              <div class="form-actions">
+                <button class="primary-action" id="save-course-reminder" type="button">保存课程</button>
+                <button class="secondary-action" id="cancel-course-edit" type="button">取消编辑</button>
+              </div>
+              <p class="settings-status" id="course-settings-status">课程提醒仅做本地配置验证。</p>
+            </section>
+            <section class="card settings-form-card">
+              <div class="section-title"><h3>课程提醒列表</h3><span id="course-count-label">0 门</span></div>
+              <div class="course-config-list" id="course-config-list"></div>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+    <div class="evolution-modal" id="evolution-modal" hidden>
+      <div class="evolution-dialog card" role="dialog" aria-modal="true" aria-labelledby="evolution-modal-title">
+        <span class="status-pill">首次进化</span>
+        <h2 id="evolution-modal-title">宠物进化了</h2>
+        <img class="pet-image showcase-pet" id="evolution-modal-image" src="./assets/pets/rabbit/default/rabbit-stage1-default.png" alt="进化后的宠物形态" />
+        <p id="evolution-modal-copy">新的成长阶段已经加入图鉴。</p>
+        <button id="evolution-modal-close" type="button">继续成长</button>
+      </div>
+    </div>
+    <div class="evolution-modal" id="reward-modal" hidden>
+      <div class="evolution-dialog card" role="dialog" aria-modal="true" aria-labelledby="reward-modal-title">
+        <span class="status-pill" id="reward-modal-eyebrow">每日签到</span>
+        <h2 id="reward-modal-title">签到成功</h2>
+        <p id="reward-modal-copy">成长能量已经到账。</p>
+        <button id="reward-modal-close" type="button">收下奖励</button>
+      </div>
+    </div>
+    <div class="evolution-modal" id="shop-modal" hidden>
+      <div class="evolution-dialog card" role="dialog" aria-modal="true" aria-labelledby="shop-modal-title">
+        <span class="status-pill" id="shop-modal-eyebrow">商城</span>
+        <h2 id="shop-modal-title">商品详情</h2>
+        <p id="shop-modal-copy">确认后将使用积分购买。</p>
+        <div class="shop-modal-actions">
+          <button id="shop-modal-cancel" type="button">取消</button>
+          <button id="shop-modal-confirm" type="button">确认购买</button>
+        </div>
+      </div>
+    </div>
+    <div class="evolution-modal" id="init-modal" hidden>
+      <div class="evolution-dialog card init-dialog" role="dialog" aria-modal="true" aria-labelledby="init-modal-title">
+        <span class="status-pill">首次初始化</span>
+        <h2 id="init-modal-title">初始化家庭数据</h2>
+        <p>设置孩子昵称、当前宠物、每日任务和第一门课程后，就可以开始家庭使用。</p>
+        <label class="form-field"><span>孩子昵称</span><input id="init-child-nickname" type="text" maxlength="12" value="悦悦" /></label>
+        <label class="form-field"><span>选择宠物</span><select id="init-current-pet"></select></label>
+        <div class="task-template-row init-task-row">
+          <label><span>每日任务</span><input id="init-task-title" type="text" value="背古诗" /></label>
+          <label><span>XP</span><input id="init-task-xp" type="number" min="0" max="120" value="12" /></label>
+          <label><span>积分</span><input id="init-task-points" type="number" min="0" max="160" value="15" /></label>
+        </div>
+        <label class="form-field"><span>第一门课程</span><input id="init-course-name" type="text" value="钢琴课" /></label>
+        <label class="form-field"><span>上课时间</span><input id="init-course-time" type="time" value="17:30" /></label>
+        <button id="finish-initialization" type="button">完成初始化</button>
+      </div>
+    </div>
+    <script src="./app.js"></script>
+  </body>
+</html>

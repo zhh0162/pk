@@ -1,0 +1,201 @@
+{
+  "assetBasePath": "./assets/pets/rabbit/default/",
+  "referenceBasePath": "./assets/references/gemini/",
+  "designPolicy": {
+    "petEvolutionPhilosophy": "biological-growth",
+    "defaultRouteRule": "默认路线必须表现宠物生物本身的自然成长，不允许通过外穿装备表达进化。",
+    "allowedEvolutionSignals": [
+      "体型变化",
+      "耳朵变化",
+      "毛发变化",
+      "眼神变化",
+      "天然纹路",
+      "天然发光元素",
+      "天然种族特征"
+    ],
+    "forbiddenDefaultRouteSignals": [
+      "披风",
+      "法杖",
+      "帽子",
+      "翅膀",
+      "眼镜",
+      "衣服",
+      "外穿装备",
+      "装备叠图",
+      "锚点挂载"
+    ],
+    "deprecatedSystems": [
+      "Anchor System",
+      "Equipment Layer System",
+      "Paper Doll System",
+      "自由换装系统"
+    ]
+  },
+  "currentPet": {
+    "petSpecies": "rabbit",
+    "level": 9,
+    "xp": 98,
+    "points": 112,
+    "equippedSkinLineId": "rabbit-default"
+  },
+  "petSpecies": [
+    { "id": "rabbit", "name": "Rabbit", "displayName": "小兔子" },
+    { "id": "cat", "name": "Cat", "displayName": "猫咪" },
+    { "id": "dog", "name": "Dog", "displayName": "柴犬" },
+    { "id": "pig", "name": "Pig", "displayName": "小猪" },
+    { "id": "capybara", "name": "Capybara", "displayName": "卡皮巴拉" },
+    { "id": "otter", "name": "Otter", "displayName": "小水獭" }
+  ],
+  "petBaseForms": [
+    {
+      "id": "rabbit-stage1",
+      "petSpecies": "rabbit",
+      "stage": "stage1",
+      "levelRange": [1, 9],
+      "imageName": "rabbit-stage1-default.png"
+    },
+    {
+      "id": "rabbit-stage2",
+      "petSpecies": "rabbit",
+      "stage": "stage2",
+      "levelRange": [10, 19],
+      "imageName": "rabbit-stage2-default.png"
+    },
+    {
+      "id": "rabbit-stage3",
+      "petSpecies": "rabbit",
+      "stage": "stage3",
+      "levelRange": [20, 30],
+      "imageName": "rabbit-stage3-default.png"
+    },
+    {
+      "id": "cat-stage1",
+      "petSpecies": "cat",
+      "stage": "stage1",
+      "levelRange": [1, 9],
+      "imageName": "cat-stage1-default.png"
+    },
+    {
+      "id": "cat-stage2",
+      "petSpecies": "cat",
+      "stage": "stage2",
+      "levelRange": [10, 19],
+      "imageName": "cat-stage2-default.png"
+    },
+    {
+      "id": "cat-stage3",
+      "petSpecies": "cat",
+      "stage": "stage3",
+      "levelRange": [20, 30],
+      "imageName": "cat-stage3-default.png"
+    },
+    {
+      "id": "pig-stage1",
+      "petSpecies": "pig",
+      "stage": "stage1",
+      "levelRange": [1, 9],
+      "imageName": "pig-stage1-default.png"
+    },
+    {
+      "id": "pig-stage2",
+      "petSpecies": "pig",
+      "stage": "stage2",
+      "levelRange": [10, 19],
+      "imageName": "pig-stage2-default.png"
+    },
+    {
+      "id": "pig-stage3",
+      "petSpecies": "pig",
+      "stage": "stage3",
+      "levelRange": [20, 30],
+      "imageName": "pig-stage3-default.png"
+    }
+  ],
+  "petSkinLines": [
+    {
+      "id": "rabbit-default",
+      "name": "默认路线",
+      "petSpecies": "rabbit",
+      "theme": "基础成长",
+      "rarity": "common",
+      "price": 0,
+      "unlockLevel": 1,
+      "unlockCondition": "初始拥有",
+      "assetBasePath": "./assets/pets/rabbit/default/",
+      "stage1Image": "rabbit-stage1-default.png",
+      "stage2Image": "rabbit-stage2-default.png",
+      "stage3Image": "rabbit-stage3-default.png"
+    },
+    {
+      "id": "cat-default",
+      "name": "猫咪默认路线",
+      "petSpecies": "cat",
+      "theme": "基础成长",
+      "rarity": "common",
+      "price": 0,
+      "unlockLevel": 1,
+      "unlockCondition": "宠物种族解锁后初始拥有",
+      "assetBasePath": "./assets/pets/cat/default/",
+      "stage1Image": "cat-stage1-default.png",
+      "stage2Image": "cat-stage2-default.png",
+      "stage3Image": "cat-stage3-default.png",
+      "validationStatus": "Cat Default Evolution v1 finalized"
+    },
+    {
+      "id": "pig-default",
+      "name": "小猪默认路线",
+      "petSpecies": "pig",
+      "theme": "基础成长",
+      "rarity": "common",
+      "price": 0,
+      "unlockLevel": 1,
+      "unlockCondition": "宠物种族解锁后初始拥有",
+      "assetBasePath": "./assets/pets/pig/default/",
+      "stage1Image": "pig-stage1-default.png",
+      "stage2Image": "pig-stage2-default.png",
+      "stage3Image": "pig-stage3-default.png",
+      "validationStatus": "Pig Default Evolution v1 finalized"
+    }
+  ],
+  "inventorySkinLines": [
+    { "skinLineId": "rabbit-default", "owned": true, "equipped": true, "acquiredAt": "initial" },
+    { "skinLineId": "cat-default", "owned": false, "equipped": false, "acquiredAt": null },
+    { "skinLineId": "pig-default", "owned": false, "equipped": false, "acquiredAt": null }
+  ],
+  "geminiReferenceBoards": [
+    {
+      "id": "rabbit-reference",
+      "petSpecies": "rabbit",
+      "name": "小兔子跃动灵魂成长轨迹",
+      "imageName": "rabbit-growth-reference.jpg",
+      "usage": "临时参考图，不作为正式透明 PNG 资源"
+    },
+    {
+      "id": "cat-reference",
+      "petSpecies": "cat",
+      "name": "猫咪暗夜魅影成长轨迹",
+      "imageName": "cat-growth-reference.jpg",
+      "usage": "临时参考图，不作为正式透明 PNG 资源"
+    },
+    {
+      "id": "pig-reference",
+      "petSpecies": "pig",
+      "name": "小猪富贵灵瑞成长轨迹",
+      "imageName": "pig-growth-reference.jpg",
+      "usage": "临时参考图，不作为正式透明 PNG 资源"
+    }
+  ],
+  "statEquipment": [
+    { "id": "learning-glasses", "name": "学习眼镜", "effect": "专注 +10", "visualMounting": false },
+    { "id": "lucky-badge", "name": "幸运徽章", "effect": "积分获取 +5%", "visualMounting": false },
+    { "id": "piano-ring", "name": "钢琴指环", "effect": "技巧 +20", "visualMounting": false },
+    { "id": "creative-brush", "name": "创造画笔", "effect": "创造力 +15", "visualMounting": false }
+  ],
+  "storeCategories": [
+    "petSkinLine",
+    "consumable",
+    "evolutionMaterial",
+    "petSwitchTicket",
+    "statEquipment"
+  ]
+}

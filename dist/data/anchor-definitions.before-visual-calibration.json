@@ -1,0 +1,111 @@
+{
+  "_deprecated": "Historical Anchor System data only. GrowPet Phase 1 uses complete biological evolution PNGs and must not mount visual equipment on pets.",
+  "rabbit": {
+    "stage1": {
+      "base": "./assets/pets/rabbit/base/rabbit-base-stage-01.png",
+      "anchors": {
+        "head": [0.5, 0.245],
+        "face": [0.5, 0.445],
+        "body": [0.5, 0.685],
+        "back": [0.5, 0.62],
+        "hand": [0.685, 0.635],
+        "footEffect": [0.5, 0.875]
+      },
+      "scale": {
+        "head": 0.24,
+        "face": 0.2,
+        "body": 0.36,
+        "back": 0.56,
+        "hand": 0.34,
+        "footEffect": 0.56
+      }
+    },
+    "stage2": {
+      "base": "./assets/pets/rabbit/base/rabbit-base-stage-02.png",
+      "anchors": {
+        "head": [0.5, 0.18],
+        "face": [0.5, 0.39],
+        "body": [0.5, 0.645],
+        "back": [0.5, 0.565],
+        "hand": [0.68, 0.605],
+        "footEffect": [0.5, 0.88]
+      },
+      "scale": {
+        "head": 0.25,
+        "face": 0.2,
+        "body": 0.38,
+        "back": 0.6,
+        "hand": 0.36,
+        "footEffect": 0.58
+      }
+    },
+    "stage3": {
+      "base": "./assets/pets/rabbit/base/rabbit-base-stage-03.png",
+      "anchors": {
+        "head": [0.5, 0.13],
+        "face": [0.5, 0.35],
+        "body": [0.5, 0.625],
+        "back": [0.5, 0.545],
+        "hand": [0.675, 0.59],
+        "footEffect": [0.5, 0.885]
+      },
+      "scale": {
+        "head": 0.26,
+        "face": 0.21,
+        "body": 0.4,
+        "back": 0.62,
+        "hand": 0.38,
+        "footEffect": 0.6
+      }
+    }
+  },
+  "equipment": {
+    "hat": {
+      "slot": "head",
+      "image": "./assets/equipment/rabbit/equip-star-hat.png",
+      "zIndex": 6
+    },
+    "glasses": {
+      "slot": "face",
+      "image": "./assets/equipment/rabbit/equip-round-glasses.png",
+      "zIndex": 7
+    },
+    "vest": {
+      "slot": "body",
+      "image": "./assets/equipment/rabbit/equip-learning-vest.png",
+      "zIndex": 4
+    },
+    "apprenticeCape": {
+      "slot": "back",
+      "image": "./assets/equipment/rabbit/equip-apprentice-cape.png",
+      "zIndex": 1
+    },
+    "guardianCape": {
+      "slot": "back",
+      "image": "./assets/equipment/rabbit/equip-guardian-cape.png",
+      "zIndex": 1
+    },
+    "wings": {
+      "slot": "back",
+      "image": "./assets/equipment/rabbit/equip-small-wings.png",
+      "zIndex": 1
+    },
+    "starWand": {
+      "slot": "hand",
+      "image": "./assets/equipment/rabbit/equip-star-wand.png",
+      "zIndex": 8,
+      "rotation": -22
+    },
+    "carrotWand": {
+      "slot": "hand",
+      "image": "./assets/equipment/rabbit/equip-carrot-wand.png",
+      "zIndex": 8,
+      "rotation": -22
+    },
+    "footHalo": {
+      "slot": "footEffect",
+      "image": "./assets/equipment/rabbit/equip-foot-halo.png",
+      "zIndex": 0
+    }
+  }
+}

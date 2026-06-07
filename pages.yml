@@ -1,0 +1,61 @@
+name: Deploy GrowPet to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Validate dist and package Pages artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate PWA files
+        run: |
+          test -f dist/index.html
+          test -f dist/manifest.webmanifest
+          test -f dist/service-worker.js
+          test -f dist/app.js
+          test -f dist/styles.css
+          test -f dist/assets/icons/icon-192.png
+          test -f dist/assets/icons/icon-512.png
+          grep -q '"start_url": "./?mode=family"' dist/manifest.webmanifest
+          grep -q '"scope": "./"' dist/manifest.webmanifest
+          grep -q './service-worker.js' dist/app.js
+
+      - name: Prepare GitHub Pages SPA fallback
+        run: |
+          cp dist/index.html dist/404.html
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
